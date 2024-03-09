@@ -33,6 +33,18 @@ console.log(randomString);
 ```
 - Example Random Output:  ```13z1ayayz2ab```
 
+###  Generating a Random String with Custom Characters:
+
+```js
+const specialChars = "!@#$%^&*";
+const randomString = Random.stringFromChars(specialChars, 15);
+console.log(randomString);
+
+// Generates a random string of 15 characters from special characters
+```
+
+- Example Random Output:  ```@^#&^&@*$%!*^$$```
+
 ### Generate an array of 30 random numbers between 0 and 1
 
 ```js
@@ -45,6 +57,13 @@ console.log(randomNumbers);
 ```js
 const randomFloat = Random.float(65, 98);
 console.log(randomFloat);
+```
+
+###  Generating an Integer Within a Range (example, 10 to 20):
+
+```js
+const randomInt = Random.int(10, 20);
+console.log(randomInt);
 ```
 
 ### Shuffle an array
@@ -63,6 +82,35 @@ const randomcrick = Random.choice(cricketer);
 console.log(randomcrick);
 ```
 
+### Picks a random character from a string
+
+```js
+const message = "Hello, world!";
+const randomChar = Random.choice(message);
+console.log(randomChar);
+```
+
+### Picks `n` number of random characters from a string
+
+```js
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+const randomSample = Random.sample(alphabet, 3);
+console.log(randomSample);
+
+// It will Pick 3 random characters from the string, "alphabet"
+```
+
+- Example Random Output:  ```[ 'w', 'l', 'r' ]```
+
+### Generate a random Hex color code
+
+```js
+const randomHex = Random.hex();
+console.log(randomHex);
+// Outputs a random hex color code (e.g., #F2A34B)
+
+```
+- Example Random Output:  ```#252096```
 
 ### Generate a random RGB color
 
