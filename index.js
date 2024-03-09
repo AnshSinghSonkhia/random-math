@@ -218,6 +218,145 @@ const Random = {
   
     return uuidParts.join("");
   },
+
+  password: function (length = 12, complexity = "medium") {
+    // Validate input
+    if (typeof length !== "number" || length <= 0) {
+      throw new Error("Password length must be a positive number");
+    }
+    if (!["low", "medium", "high"].includes(complexity.toLowerCase())) {
+      throw new Error("Invalid complexity level. Choose 'low', 'medium', or 'high'");
+    }
+  
+    // Define character pools for different complexity levels
+    const charPools = {
+      low: "abcdefghijklmnopqrstuvwxyz0123456789",
+      medium: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()",
+      high: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':\",<.>/?`~"
+    };
+  
+    // Select character pool based on complexity
+    const charPool = charPools[complexity.toLowerCase()];
+  
+    // Generate random password string
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      password += charPool[Math.floor(Math.random() * charPool.length)];
+    }
+  
+    // Ensure password meets minimum complexity requirements (optional)
+    if (complexity !== "low") {
+      const hasLowercase = /[a-z]/.test(password);
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasNumber = /[0-9]/.test(password);
+      const hasSymbol = /[!@#$%^&*()]/.test(password) || (complexity === "high" && /[_+\-=\[\]{}|;':",.<>\/?`~]/.test(password)); // Corrected regular expression and added grouping parentheses
+  
+      if (!hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
+        // Regenerate password if minimum requirements not met
+        return this.password(length, complexity);
+      }
+    }
+  
+    return password;
+  },
+
+  complimentaryColor: function (color) {
+    // Function to convert RGB to HSL
+    const rgbToHsl = function (r, g, b) {
+      (r /= 255), (g /= 255), (b /= 255);
+      const max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
+      let h,
+        s,
+        l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+          case g:
+            h = (b - r) / d + 2;
+            break;
+          case b:
+            h = (r - g) / d + 4;
+            break;
+        }
+        h /= 6;
+      }
+
+      return [h * 360, s * 100, l * 100];
+    };
+
+    // Function to convert HSL to RGB
+    const hslToRgb = function (h, s, l) {
+      let r, g, b;
+      h /= 360;
+      s /= 100;
+      l /= 100;
+
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        const hue2rgb = function (p, q, t) {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+      }
+
+      return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    };
+
+    // Helper function to ensure value stays within valid range
+    const clamp = function (value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    };
+
+    // Convert input color to HSL
+    let hslColor;
+    if (color.startsWith("rgb")) {
+      const [r, g, b] = color.match(/\d+/g);
+      hslColor = rgbToHsl(parseInt(r), parseInt(g), parseInt(b));
+    } else if (color.startsWith("hsl")) {
+      hslColor = color.match(/\d+/g).map(Number);
+    } else {
+      throw new Error(
+        "Unsupported color format. Only RGB and HSL formats are supported."
+      );
+    }
+
+    // Calculate complementary hue
+    let complementaryHue = (hslColor[0] + 180) % 360;
+
+    // Convert complementary hue back to original format
+    complementaryHue = clamp(complementaryHue, 0, 360);
+    let complementaryColor;
+
+    // Check the original format and convert back accordingly
+    if (color.startsWith("rgb")) {
+      const [r, g, b] = hslToRgb(complementaryHue, hslColor[1], hslColor[2]);
+      complementaryColor = `rgb(${r},${g},${b})`;
+    } else {
+      complementaryColor = `hsl(${complementaryHue.toFixed(
+        0
+      )},${hslColor[1].toFixed(2)}%,${hslColor[2].toFixed(2)}%)`;
+    }
+
+    return complementaryColor;
+  },
 };
 
 module.exports = Random;

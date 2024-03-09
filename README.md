@@ -84,6 +84,17 @@ console.log(randomString);
 
 - Example Random Output:  ```@^#&^&@*$%!*^$$```
 
+### `password`: Generate a random password with specified criteria (length, complexity).
+
+```js
+const lowPassword = Random.password(6, "low");
+console.log(lowPassword);     // example output:  f8iis2
+const mediumPassword = Random.password(10, "medium");
+console.log(mediumPassword);  // example output:  lwf5cn$ePw
+const highPassword = Random.password(16, "high");
+console.log(highPassword);    // example output:  "{)#lhI>N4"xiW*@
+```
+
 ### Generate an array of 30 random numbers between 0 and 1
 
 ```js
@@ -172,6 +183,16 @@ console.log(randomHSL);
 ```
 
 - Example Random Output:  ```hsl(313, 91%, 25%)```
+
+### `complimentaryColor` : Generate a random color complementary to a given color.
+
+```js
+console.log(Random.complimentaryColor("rgb(100,200,250)"));
+// returns - rgb(250,150,100)
+
+console.log(Random.complimentaryColor("hsl(120,50%,50%)"));
+// returns - hsl(300,50.00%,50.00%)
+```
 
 ### Randomly return "heads" or "tails" with custom probabilities.
 
