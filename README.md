@@ -131,4 +131,23 @@ console.log(randomHSL);
 
 - Example Random Output:  ```hsl(313, 91%, 25%)```
 
+### Flips the coin to randomly return `Heads` or `Tails`
 
+- `Unbiased Coin` - Randomly returns "heads" or "tails" with equal probability (0.5) or half.
+
+```js
+const randomOutcome = Random.coinFlip();
+console.log(randomOutcome);
+```
+> Example Random Output:  ```tails```
+
+- `Biased Coin` - Returns "heads" with the given X% probability and "tails" with (100-X)% probability
+
+```js
+// Flip a coin with a 70% chance of heads
+const biasedOutcome = Random.coinFlip(0.7);
+// Returns "heads" with 70% probability and "tails" with 30% probability
+console.log(biasedOutcome);
+```
+
+> Example Random Output:  ```heads```

@@ -76,6 +76,19 @@ const Random = {
       100
     )}%)`;
   },
+
+  coinFlip: function (headsProbability = 0.5) {
+    // Validate probability input (between 0 and 1)
+    if (headsProbability < 0 || headsProbability > 1) {
+      throw new Error("Heads probability must be between 0 and 1");
+    }
+
+    // Generate random float between 0 and 1
+    const randomValue = Math.random();
+
+    // Return "heads" if random value is less than headsProbability, otherwise "tails"
+    return randomValue < headsProbability ? "heads" : "tails";
+  },
 };
 
 module.exports = Random;
