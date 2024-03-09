@@ -93,25 +93,28 @@ const Random = {
   bool: function () {
     // Generate random float between 0 and 1
     const randomValue = Math.random();
-  
+
     // Return true if random value is less than 0.5 (fair coin flip), otherwise false
     return randomValue < 0.5;
   },
 
-  subset: function (array, size = Math.floor(Math.random() * (array.length + 1))) {
+  subset: function (
+    array,
+    size = Math.floor(Math.random() * (array.length + 1))
+  ) {
     // Validate input
     if (!Array.isArray(array)) {
       throw new Error("Input must be an array");
     }
-  
+
     // Handle edge cases: empty array or requested size exceeding array length
     if (array.length === 0 || size > array.length) {
       return [];
     }
-  
+
     // Use Fisher-Yates shuffle to randomize the array
     const shuffledArray = Random.shuffle([...array]); // Create a copy to avoid mutation
-  
+
     // Select the desired subset size from the shuffled array
     return shuffledArray.slice(0, size);
   },
@@ -121,12 +124,12 @@ const Random = {
     if (!Array.isArray(set)) {
       throw new Error("Input must be an array");
     }
-  
+
     const powerSet = [];
-  
+
     // Include an empty set as a base case
     powerSet.push([]);
-  
+
     // Iterate through each element in the set
     for (const element of set) {
       const temp = [];
@@ -137,7 +140,7 @@ const Random = {
       // Add the newly created subsets with the current element to the powerSet
       powerSet.push(...temp);
     }
-  
+
     return powerSet;
   },
 
@@ -146,37 +149,42 @@ const Random = {
     if (!Array.isArray(array)) {
       throw new Error("Input must be an array");
     }
-  
+
     // Base case: permutation of a single element is the element itself
     if (array.length === 1) {
       return [array];
     }
-  
+
     const permutations = [];
     for (let i = 0; i < array.length; i++) {
       // Fix the current element and recursively permute the remaining elements
       const currentElement = array[i];
       const remaining = array.slice(0, i).concat(array.slice(i + 1));
       const subPermutations = Random.permute(remaining);
-  
+
       // Insert the current element into all possible positions of each sub-permutation
       for (const subPermutation of subPermutations) {
         permutations.push([currentElement].concat(subPermutation));
       }
     }
-  
+
     return permutations;
   },
 
   uuid: function () {
     // Check for modern browsers with crypto.randomUUID support (recommended)
-    if (typeof window !== 'undefined' && window.crypto && window.crypto.randomUUID) {
+    if (
+      typeof window !== "undefined" &&
+      window.crypto &&
+      window.crypto.randomUUID
+    ) {
       return window.crypto.randomUUID();
     } else {
       // Fallback for older environments (less secure)
       const chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-      return chars.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return chars.replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
       });
     }
@@ -187,10 +195,10 @@ const Random = {
     if (typeof formatString !== "string") {
       throw new Error("Format string must be a string");
     }
-  
+
     const uuidParts = [];
     let currentSection = "";
-  
+
     // Iterate through the format string
     for (let char of formatString) {
       if (/[^xy]/.test(char)) {
@@ -203,19 +211,22 @@ const Random = {
         // Throw error for unsupported format characters
         throw new Error(`Unsupported format character: ${char}`);
       }
-  
+
       // Complete and separate sections as needed
-      if (currentSection.length === (char === "x" || char === "y" ? 1 : currentSection.length)) {
+      if (
+        currentSection.length ===
+        (char === "x" || char === "y" ? 1 : currentSection.length)
+      ) {
         uuidParts.push(currentSection);
         currentSection = "";
       }
     }
-  
+
     // Ensure all sections are completed
     if (currentSection.length > 0) {
       throw new Error("Incomplete format string section");
     }
-  
+
     return uuidParts.join("");
   },
 
@@ -225,39 +236,57 @@ const Random = {
       throw new Error("Password length must be a positive number");
     }
     if (!["low", "medium", "high"].includes(complexity.toLowerCase())) {
-      throw new Error("Invalid complexity level. Choose 'low', 'medium', or 'high'");
+      throw new Error(
+        "Invalid complexity level. Choose 'low', 'medium', or 'high'"
+      );
     }
-  
+
     // Define character pools for different complexity levels
     const charPools = {
       low: "abcdefghijklmnopqrstuvwxyz0123456789",
-      medium: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()",
-      high: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':\",<.>/?`~"
+      medium:
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()",
+      high: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':\",<.>/?`~",
     };
-  
+
     // Select character pool based on complexity
     const charPool = charPools[complexity.toLowerCase()];
-  
+
     // Generate random password string
     let password = "";
     for (let i = 0; i < length; i++) {
       password += charPool[Math.floor(Math.random() * charPool.length)];
     }
-  
+
     // Ensure password meets minimum complexity requirements (optional)
     if (complexity !== "low") {
       const hasLowercase = /[a-z]/.test(password);
       const hasUppercase = /[A-Z]/.test(password);
       const hasNumber = /[0-9]/.test(password);
-      const hasSymbol = /[!@#$%^&*()]/.test(password) || (complexity === "high" && /[_+\-=\[\]{}|;':",.<>\/?`~]/.test(password)); // Corrected regular expression and added grouping parentheses
-  
+      const hasSymbol =
+        /[!@#$%^&*()]/.test(password) ||
+        (complexity === "high" && /[_+\-=\[\]{}|;':",.<>\/?`~]/.test(password)); // Corrected regular expression and added grouping parentheses
+
       if (!hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
         // Regenerate password if minimum requirements not met
         return this.password(length, complexity);
       }
     }
-  
+
     return password;
+  },
+
+  grayscale: function () {
+    // Generate random RGB values
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    // Calculate grayscale value
+    const grayValue = Math.round(0.2126 * r + 0.7152 * g + 0.0722 * b);
+
+    // Return grayscale color in RGB format
+    return `rgb(${grayValue},${grayValue},${grayValue})`;
   },
 
   complimentaryColor: function (color) {
@@ -356,6 +385,232 @@ const Random = {
     }
 
     return complementaryColor;
+  },
+
+  randomShade: function (color) {
+    // Function to convert hex to RGB
+    const hexToRgb = function (hex) {
+      hex = hex.replace(/^#/, "");
+      const bigint = parseInt(hex, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return [r, g, b];
+    };
+
+    // Function to convert RGB to HSL
+    const rgbToHsl = function (r, g, b) {
+      (r /= 255), (g /= 255), (b /= 255);
+      const max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
+      let h,
+        s,
+        l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+          case g:
+            h = (b - r) / d + 2;
+            break;
+          case b:
+            h = (r - g) / d + 4;
+            break;
+        }
+        h /= 6;
+      }
+
+      return [h * 360, s * 100, l * 100];
+    };
+
+    // Function to convert HSL to RGB
+    const hslToRgb = function (h, s, l) {
+      let r, g, b;
+      h /= 360;
+      s /= 100;
+      l /= 100;
+
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        const hue2rgb = function (p, q, t) {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+      }
+
+      return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    };
+
+    // Calculate new lightness value for shade (darker)
+    const adjustLightnessForShade = function (l) {
+      const minLightness = 10; // Minimum lightness value to avoid going completely black
+      return Math.max(l - Math.random() * 20, minLightness);
+    };
+
+    // Convert color to HSL
+    let hslColor;
+    if (color.startsWith("#")) {
+      const [r, g, b] = hexToRgb(color);
+      hslColor = rgbToHsl(r, g, b);
+    } else if (color.startsWith("rgb")) {
+      const [r, g, b] = color.match(/\d+/g).map(Number);
+      hslColor = rgbToHsl(r, g, b);
+    } else if (color.startsWith("hsl")) {
+      hslColor = color.match(/\d+/g).map(Number);
+    } else {
+      throw new Error(
+        "Unsupported color format. Only RGB, HSL, and HEX formats are supported."
+      );
+    }
+
+    // Adjust lightness for shade (darker)
+    hslColor[2] = adjustLightnessForShade(hslColor[2]);
+
+    // Convert HSL back to the original format
+    let newColor;
+    if (color.startsWith("rgb")) {
+      const [r, g, b] = hslToRgb(hslColor[0], hslColor[1], hslColor[2]);
+      newColor = `rgb(${r},${g},${b})`;
+    } else if (color.startsWith("hsl")) {
+      newColor = `hsl(${hslColor[0].toFixed(0)},${hslColor[1].toFixed(
+        2
+      )}%,${hslColor[2].toFixed(2)}%)`;
+    } else {
+      newColor = `#${hslToRgb(hslColor[0], hslColor[1], hslColor[2])
+        .map((c) => c.toString(16).padStart(2, "0"))
+        .join("")}`;
+    }
+
+    return newColor;
+  },
+
+  randomTint: function (color) {
+    // Function to convert hex to RGB
+    const hexToRgb = function (hex) {
+      hex = hex.replace(/^#/, "");
+      const bigint = parseInt(hex, 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return [r, g, b];
+    };
+
+    // Function to convert RGB to HSL
+    const rgbToHsl = function (r, g, b) {
+      (r /= 255), (g /= 255), (b /= 255);
+      const max = Math.max(r, g, b),
+        min = Math.min(r, g, b);
+      let h,
+        s,
+        l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r:
+            h = (g - b) / d + (g < b ? 6 : 0);
+            break;
+          case g:
+            h = (b - r) / d + 2;
+            break;
+          case b:
+            h = (r - g) / d + 4;
+            break;
+        }
+        h /= 6;
+      }
+
+      return [h * 360, s * 100, l * 100];
+    };
+
+    // Function to convert HSL to RGB
+    const hslToRgb = function (h, s, l) {
+      let r, g, b;
+      h /= 360;
+      s /= 100;
+      l /= 100;
+
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        const hue2rgb = function (p, q, t) {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+      }
+
+      return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    };
+
+    // Calculate new lightness value for tint (lighter)
+    const adjustLightnessForTint = function (l) {
+      const maxLightness = 90; // Maximum lightness value to avoid going completely white
+      return Math.min(l + Math.random() * 20, maxLightness);
+    };
+
+    // Convert color to HSL
+    let hslColor;
+    if (color.startsWith("#")) {
+      const [r, g, b] = hexToRgb(color);
+      hslColor = rgbToHsl(r, g, b);
+    } else if (color.startsWith("rgb")) {
+      const [r, g, b] = color.match(/\d+/g).map(Number);
+      hslColor = rgbToHsl(r, g, b);
+    } else if (color.startsWith("hsl")) {
+      hslColor = color.match(/\d+/g).map(Number);
+    } else {
+      throw new Error(
+        "Unsupported color format. Only RGB, HSL, and HEX formats are supported."
+      );
+    }
+
+    // Adjust lightness for tint (lighter)
+    hslColor[2] = adjustLightnessForTint(hslColor[2]);
+
+    // Convert HSL back to the original format
+    let newColor;
+    if (color.startsWith("rgb")) {
+      const [r, g, b] = hslToRgb(hslColor[0], hslColor[1], hslColor[2]);
+      newColor = `rgb(${r},${g},${b})`;
+    } else if (color.startsWith("hsl")) {
+      newColor = `hsl(${hslColor[0].toFixed(0)},${hslColor[1].toFixed(
+        2
+      )}%,${hslColor[2].toFixed(2)}%)`;
+    } else {
+      newColor = `#${hslToRgb(hslColor[0], hslColor[1], hslColor[2])
+        .map((c) => c.toString(16).padStart(2, "0"))
+        .join("")}`;
+    }
+
+    return newColor;
   },
 };
 

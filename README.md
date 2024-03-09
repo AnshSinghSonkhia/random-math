@@ -184,6 +184,15 @@ console.log(randomHSL);
 
 - Example Random Output:  ```hsl(313, 91%, 25%)```
 
+### `grayscale`: Generate random grayscale color.
+
+```js
+console.log(Random.grayscale());
+// returns a random grayscale color in RGB format
+```
+
+- Example Random Output:  ```rgb(139,139,139)```
+
 ### `complimentaryColor` : Generate a random color complementary to a given color.
 
 ```js
@@ -193,6 +202,24 @@ console.log(Random.complimentaryColor("rgb(100,200,250)"));
 console.log(Random.complimentaryColor("hsl(120,50%,50%)"));
 // returns - hsl(300,50.00%,50.00%)
 ```
+
+### `randomShade`: Generate a random shade (darker version) of a given color.
+
+```js
+console.log(Random.randomShade("#ff0000"));
+// Output a random shade of red
+```
+
+- Example Random Output:  ```#d90000```
+
+### `randomTint`: Generate a random tint (lighter version) of a given color.
+
+```js
+console.log(Random.randomTint("#ff0000"));
+// Output a random tint of red
+```
+
+- Example Random Output:  ```#ff2525```
 
 ### Randomly return "heads" or "tails" with custom probabilities.
 
