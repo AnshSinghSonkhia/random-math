@@ -205,3 +205,25 @@ console.log(powerAyaa);
   [ 3 ],    [ 1, 3 ],
   [ 2, 3 ], [ 1, 2, 3 ]
 ]```
+
+### Generate all possible permutations of an array.
+
+> **NOTE:** It can be computationally expensive for large arrays
+
+```js
+const letters = ["x", "y", "z"];
+// Generate all permutations of the letters array
+const allPermutations = Random.permute(letters);
+console.log(allPermutations);
+
+// Output will show all possible orderings of the letters
+```
+
+> Example Random Output:  ```[
+  [ 'x', 'y', 'z' ],
+  [ 'x', 'z', 'y' ],
+  [ 'y', 'x', 'z' ],
+  [ 'y', 'z', 'x' ],
+  [ 'z', 'x', 'y' ],
+  [ 'z', 'y', 'x' ]
+]```

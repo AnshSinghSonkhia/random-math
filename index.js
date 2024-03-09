@@ -140,6 +140,33 @@ const Random = {
   
     return powerSet;
   },
+
+  permute: function (array) {
+    // Validate input
+    if (!Array.isArray(array)) {
+      throw new Error("Input must be an array");
+    }
+  
+    // Base case: permutation of a single element is the element itself
+    if (array.length === 1) {
+      return [array];
+    }
+  
+    const permutations = [];
+    for (let i = 0; i < array.length; i++) {
+      // Fix the current element and recursively permute the remaining elements
+      const currentElement = array[i];
+      const remaining = array.slice(0, i).concat(array.slice(i + 1));
+      const subPermutations = Random.permute(remaining);
+  
+      // Insert the current element into all possible positions of each sub-permutation
+      for (const subPermutation of subPermutations) {
+        permutations.push([currentElement].concat(subPermutation));
+      }
+    }
+  
+    return permutations;
+  },
 };
 
 module.exports = Random;
