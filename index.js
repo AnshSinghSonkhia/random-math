@@ -89,6 +89,57 @@ const Random = {
     // Return "heads" if random value is less than headsProbability, otherwise "tails"
     return randomValue < headsProbability ? "heads" : "tails";
   },
+
+  bool: function () {
+    // Generate random float between 0 and 1
+    const randomValue = Math.random();
+  
+    // Return true if random value is less than 0.5 (fair coin flip), otherwise false
+    return randomValue < 0.5;
+  },
+
+  subset: function (array, size = Math.floor(Math.random() * (array.length + 1))) {
+    // Validate input
+    if (!Array.isArray(array)) {
+      throw new Error("Input must be an array");
+    }
+  
+    // Handle edge cases: empty array or requested size exceeding array length
+    if (array.length === 0 || size > array.length) {
+      return [];
+    }
+  
+    // Use Fisher-Yates shuffle to randomize the array
+    const shuffledArray = Random.shuffle([...array]); // Create a copy to avoid mutation
+  
+    // Select the desired subset size from the shuffled array
+    return shuffledArray.slice(0, size);
+  },
+
+  powerSet: function (set) {
+    // Validate input
+    if (!Array.isArray(set)) {
+      throw new Error("Input must be an array");
+    }
+  
+    const powerSet = [];
+  
+    // Include an empty set as a base case
+    powerSet.push([]);
+  
+    // Iterate through each element in the set
+    for (const element of set) {
+      const temp = [];
+      // For each existing subset, create a new subset with the current element added
+      for (const subset of powerSet) {
+        temp.push(subset.concat(element));
+      }
+      // Add the newly created subsets with the current element to the powerSet
+      powerSet.push(...temp);
+    }
+  
+    return powerSet;
+  },
 };
 
 module.exports = Random;

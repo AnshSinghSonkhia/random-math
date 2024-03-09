@@ -74,6 +74,9 @@ const shuffledNumbers = Random.shuffle(numbers);
 console.log(shuffledNumbers);
 ```
 
+- Example Random Output: ```[6, 4, 1, 7, 5, 2, 9, 8, 3]```
+
+
 ### Pick a random item from an array
 
 ```js
@@ -131,7 +134,7 @@ console.log(randomHSL);
 
 - Example Random Output:  ```hsl(313, 91%, 25%)```
 
-### Flips the coin to randomly return `Heads` or `Tails`
+### Randomly return "heads" or "tails" with custom probabilities.
 
 - `Unbiased Coin` - Randomly returns "heads" or "tails" with equal probability (0.5) or half.
 
@@ -151,3 +154,54 @@ console.log(biasedOutcome);
 ```
 
 > Example Random Output:  ```heads```
+
+### Randomly returns `true` or `false`
+
+```js
+const randomBool = Random.bool();
+console.log(randomBool);
+```
+
+### Generate a random subset of elements from an array.
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6];
+
+// Generate a random subset with size 3 (can vary)
+const randomSubset = Random.subset(numbers, 3);
+console.log(randomSubset);
+```
+
+> Example Random Output:  ```[ 6, 4, 2 ]```
+
+### Generate the `Power Set` of the given Set
+
+```js
+const colors = ["red", "green", "blue"];
+const allColorCombinations = Random.powerSet(colors);
+console.log(allColorCombinations);
+```
+> Example Random Output:  ```[
+  [],
+  [ 'red' ],
+  [ 'green' ],
+  [ 'red', 'green' ],
+  [ 'blue' ],
+  [ 'red', 'blue' ],
+  [ 'green', 'blue' ],
+  [ 'red', 'green', 'blue' ]
+]```
+
+
+```js
+const ayaa = [1, 2, 3];
+const powerAyaa = Random.powerSet(ayaa);
+console.log(powerAyaa);
+```
+
+> Example Random Output:  ```[
+  [],       [ 1 ],
+  [ 2 ],    [ 1, 2 ],
+  [ 3 ],    [ 1, 3 ],
+  [ 2, 3 ], [ 1, 2, 3 ]
+]```
