@@ -167,6 +167,57 @@ const Random = {
   
     return permutations;
   },
+
+  uuid: function () {
+    // Check for modern browsers with crypto.randomUUID support (recommended)
+    if (typeof window !== 'undefined' && window.crypto && window.crypto.randomUUID) {
+      return window.crypto.randomUUID();
+    } else {
+      // Fallback for older environments (less secure)
+      const chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+      return chars.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+  },
+
+  customUUID: function (formatString = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx") {
+    // Validate input format
+    if (typeof formatString !== "string") {
+      throw new Error("Format string must be a string");
+    }
+  
+    const uuidParts = [];
+    let currentSection = "";
+  
+    // Iterate through the format string
+    for (let char of formatString) {
+      if (/[^xy]/.test(char)) {
+        // Handle literal characters
+        currentSection += char;
+      } else if (char === "x" || char === "y") {
+        // Generate random character for "x" and "y" sections on demand
+        currentSection += Math.floor(Math.random() * 16).toString(16);
+      } else {
+        // Throw error for unsupported format characters
+        throw new Error(`Unsupported format character: ${char}`);
+      }
+  
+      // Complete and separate sections as needed
+      if (currentSection.length === (char === "x" || char === "y" ? 1 : currentSection.length)) {
+        uuidParts.push(currentSection);
+        currentSection = "";
+      }
+    }
+  
+    // Ensure all sections are completed
+    if (currentSection.length > 0) {
+      throw new Error("Incomplete format string section");
+    }
+  
+    return uuidParts.join("");
+  },
 };
 
 module.exports = Random;

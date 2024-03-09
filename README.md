@@ -25,6 +25,45 @@ const Random = require('random-math');
 import Random from 'random-math';
 ```
 
+### uuid - Generates a Random "Universally Unique Identifier" (UUIDv4).
+
+```js
+const randomUUID = Random.uuid();
+console.log(randomUUID);
+// Output will be a string in the format "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+```
+
+> Example Random Output:  ```f317952b-01fc-4442-8533-219470b5a20b```
+
+### customUUID - You can customize the UUID you want to randomly generate
+
+- Example 1:
+
+```js
+const customId = Random.customUUID("xxxx-xxxx-xxxx-xxxx");
+console.log(customId);
+```
+
+> Example Random Output:  ```4e4e-6730-536a-7b45```
+
+- Example 2:
+
+```js
+const customCode = Random.customUUID("yyy_yyy_yyy");
+console.log(customCode);
+```
+
+> Example Random Output:  ```1b2_79b_782```
+
+- Example 3:
+
+```js
+const customToken = Random.customUUID("xx-xx-xx-yy-xxxxxxxx");
+console.log(customToken);
+```
+
+- Example Random Output:  ```12-92-28-9f-5c219e65```
+
 ### Generate a random string of 12 characters
 
 ```js
