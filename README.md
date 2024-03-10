@@ -12,20 +12,20 @@ npm i random-math
 ```
 
 # Usage
-<!-- import Random from 'random-math'; -->
 
-> Using traditional method for Node.js projects that follow the CommonJS module system:
-
-```js
-const Random = require('random-math');
-```
 > for modern JavaScript projects using ESM:
 
 ```js
 import Random from 'random-math';
 ```
 
-### uuid - Generates a Random "Universally Unique Identifier" (UUIDv4).
+> Using traditional method for Node.js projects that follow the CommonJS module system:
+
+```js
+const Random = require('random-math');
+```
+
+### `uuid`: Generates a Random "Universally Unique Identifier" (UUIDv4).
 
 ```js
 const randomUUID = Random.uuid();
@@ -35,7 +35,7 @@ console.log(randomUUID);
 
 > Example Random Output:  ```f317952b-01fc-4442-8533-219470b5a20b```
 
-### customUUID - You can customize the UUID you want to randomly generate
+### `customUUID`: You can customize the UUID you want to randomly generate
 
 - Example 1:
 
@@ -64,7 +64,7 @@ console.log(customToken);
 
 - Example Random Output:  ```12-92-28-9f-5c219e65```
 
-### Generate a random string of 12 characters
+### `stringFromChars`: Generates a random string of 12 characters
 
 ```js
 const randomString = Random.stringFromChars(undefined, 12);
@@ -72,7 +72,7 @@ console.log(randomString);
 ```
 - Example Random Output:  ```13z1ayayz2ab```
 
-###  Generating a Random String with Custom Characters:
+###  `stringFromChars`: Generates a Random String with Custom Characters:
 
 ```js
 const specialChars = "!@#$%^&*";
@@ -95,28 +95,28 @@ const highPassword = Random.password(16, "high");
 console.log(highPassword);    // example output:  "{)#lhI>N4"xiW*@
 ```
 
-### Generate an array of 30 random numbers between 0 and 1
+### `multiFloat`: Generates an array of n random numbers between specific range.
 
 ```js
-const randomNumbers = Random.multiFloat(0, 1, 30);
+const randomNumbers = Random.multiFloat(0, 1, 30);  // 30 random numbers between 0 and 1
 console.log(randomNumbers);
 ```
 
-### Generate a random floating-point number between 65 and 98
+### `float`: Generates a Random floating-point number within a Range
 
 ```js
-const randomFloat = Random.float(65, 98);
+const randomFloat = Random.float(65, 98);   // range is 65-98
 console.log(randomFloat);
 ```
 
-###  Generating an Integer Within a Range (example, 10 to 20):
+###  `int`: Generates a Random Integer within a Range
 
 ```js
-const randomInt = Random.int(10, 20);
+const randomInt = Random.int(10, 20);   // range is 10-20
 console.log(randomInt);
 ```
 
-### Shuffle an array
+### `shuffle`: Randomly shuffles an array
 
 ```js
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -127,7 +127,7 @@ console.log(shuffledNumbers);
 - Example Random Output: ```[6, 4, 1, 7, 5, 2, 9, 8, 3]```
 
 
-### Pick a random item from an array
+### `choice`: Picks a random item from an array
 
 ```js
 const cricketer = ["virat", "dhoni", "sachin", "ashwin", "bumrah"];
@@ -135,7 +135,7 @@ const randomcrick = Random.choice(cricketer);
 console.log(randomcrick);
 ```
 
-### Picks a random character from a string
+### `choice`: Picks a random character from a string
 
 ```js
 const message = "Hello, world!";
@@ -143,11 +143,11 @@ const randomChar = Random.choice(message);
 console.log(randomChar);
 ```
 
-### Picks `n` number of random characters from a string
+### `sample`: Randomly picks `n` number of random characters from a string
 
 ```js
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
-const randomSample = Random.sample(alphabet, 3);
+const randomSample = Random.sample(alphabet, 3);    // here, n = 3
 console.log(randomSample);
 
 // It will Pick 3 random characters from the string, "alphabet"
@@ -155,7 +155,7 @@ console.log(randomSample);
 
 - Example Random Output:  ```[ 'w', 'l', 'r' ]```
 
-### Generate a random Hex color code
+### `hex`: Generates a random Hex color code
 
 ```js
 const randomHex = Random.hex();
@@ -165,7 +165,7 @@ console.log(randomHex);
 ```
 - Example Random Output:  ```#252096```
 
-### Generate a random RGB color
+### `rgb`: Generates a random RGB color
 
 ```js
 const randomRGB = Random.rgb();
@@ -175,7 +175,7 @@ console.log(randomRGB);
 - Example Random Output:  ```rgb(211, 215, 118)```
 
 
-### Generate a random HSL color
+### `hsl`: Generate a random HSL color
 
 ```js
 const randomHSL = Random.hsl();
@@ -221,7 +221,7 @@ console.log(Random.randomTint("#ff0000"));
 
 - Example Random Output:  ```#ff2525```
 
-### Randomly return "heads" or "tails" with custom probabilities.
+### `coinFlip`: Randomly return "heads" or "tails" with custom probabilities.
 
 - `Unbiased Coin` - Randomly returns "heads" or "tails" with equal probability (0.5) or half.
 
@@ -242,14 +242,14 @@ console.log(biasedOutcome);
 
 > Example Random Output:  ```heads```
 
-### Randomly returns `true` or `false`
+### `bool`: Randomly returns `true` or `false`
 
 ```js
 const randomBool = Random.bool();
 console.log(randomBool);
 ```
 
-### Generate a random subset of elements from an array.
+### `subset`: Generates a random subset of elements from an array.
 
 ```js
 const numbers = [1, 2, 3, 4, 5, 6];
@@ -261,7 +261,7 @@ console.log(randomSubset);
 
 > Example Random Output:  ```[ 6, 4, 2 ]```
 
-### Generate the `Power Set` of the given Set
+### `powerSet`: Generates the `Power Set` of the given Set
 
 ```js
 const colors = ["red", "green", "blue"];
@@ -293,7 +293,7 @@ console.log(powerAyaa);
   [ 2, 3 ], [ 1, 2, 3 ]
 ]```
 
-### Generate all possible permutations of an array.
+### `permute`: Generates all possible permutations of an array.
 
 > **NOTE:** It can be computationally expensive for large arrays
 
@@ -314,3 +314,73 @@ console.log(allPermutations);
   [ 'z', 'x', 'y' ],
   [ 'z', 'y', 'x' ]
 ]```
+
+### `rollDice`: Generates a random simulated result of rolling a die with a specified number of sides.
+
+1. To roll a standard 6-sided die:
+
+```js
+const roll1 = Random.rollDice();
+console.log(roll1);     // output -> 1 to 6
+```
+
+2. To roll a 10-sided die:
+
+```js
+const roll2 = Random.rollDice(10);
+console.log(roll2);     // output -> 1 to 10
+```
+
+### `shuffleDeck`: Randomly shuffle a deck of cards (array of card objects).
+
+```js
+const deck = [
+	{ value: "Ace", suit: "Spades" },
+	{ value: "King", suit: "Hearts" },
+	{ value: "Queen", suit: "Diamond" },
+	// ... (add more card objects to the deck)
+  ];
+  
+  const shuffledDeck = Random.shuffleDeck(deck);
+  console.log(shuffledDeck);
+  // Random Output: An array of card objects in a shuffled order
+```
+
+### `pickCard`: Returns a random card from a standard deck of 52 cards
+
+```js
+const randomCard = Random.pickCard();
+console.log(randomCard);
+```
+
+- Example Random Output:  ```{ card: 'King', suit: 'Diamonds' }```
+
+### `even`: Generate a random even number within a range.
+
+```js
+// Generate even number between 20 and 50 (inclusive)
+const randomEvenNumber = Random.even(20, 50);
+console.log(randomEvenNumber);
+```
+
+- Example Random Output:  ```44```
+
+### `odd`: Generate a random odd number within a range.
+
+```js
+// Generate odd number between 15 and 35 (inclusive)
+const randomOddNumber = Random.odd(15, 35);
+console.log(randomOddNumber);
+```
+
+- Example Random Output:  ```17```
+
+### `prime`: Generate a random prime number within a range (computationally expensive).
+
+```js
+// Generate prime number between 50 and 400 (inclusive)
+const randomPrimeNumber = Random.prime(50, 400);
+console.log(randomPrimeNumber);
+```
+
+- Example Random Output:  ```367```

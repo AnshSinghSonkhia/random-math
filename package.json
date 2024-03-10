@@ -1,6 +1,6 @@
 {
   "name": "random-math",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Versatile randomization functions, Python-inspired, covering numbers, arrays, choices, characters, and colors.",
   "main": "index.js",
   "scripts": {
