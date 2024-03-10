@@ -23,6 +23,56 @@ import Random from 'random-math';
 const Random = require('random-math');
 ```
 
+# List of all the functions:
+
+## Random Generators:
+
+1. [uuid](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#uuid-generates-a-random-universally-unique-identifier-uuidv4): Generates a Random "Universally Unique Identifier" (UUIDv4).
+2. [customUUID](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#customuuid-you-can-customize-the-uuid-you-want-to-randomly-generate): You can customize the UUID you want to randomly generate.
+3. [password](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#password-generate-a-random-password-with-specified-criteria-length-complexity): Generate a random password with specified criteria (length, complexity).
+
+## Random Number Generation:
+
+1. [bool](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#bool-randomly-returns-true-or-false): Generates a random boolean value (true/false).
+2. [even](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#even-generate-a-random-even-number-within-a-range): Generate a random even number within a range.
+3. [odd](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#odd-generate-a-random-odd-number-within-a-range): Generate a random odd number within a range.
+4. [prime](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#prime-generate-a-random-prime-number-within-a-range-computationally-expensive): Generate a random prime number within a range (computationally expensive).
+5. [float](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#float-generates-a-random-floating-point-number-within-a-range): Generates a Random floating-point number within a Range.
+6. [int](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#int-generates-a-random-integer-within-a-range): Generates a Random Integer within a Range.
+7. [multiFloat](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#multifloat-generates-an-array-of-n-random-numbers-between-specific-range): Generates an array of n random numbers between specific range.
+
+## String Operations:
+
+1. [stringFromChars](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#stringfromchars-generates-a-random-string-of-12-characters): Generates a random string of 12 characters.
+2. [stringFromChars](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#stringfromchars-generates-a-random-string-with-custom-characters): Generates a Random String with Custom Characters.
+3. [choice](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#choice-picks-a-random-character-from-a-string): Picks a random character from a string.
+4. [sample](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#sample-randomly-picks-n-number-of-random-characters-from-a-string): Randomly picks n number of random characters from a string.
+
+## Array Operations:
+
+1. [subset](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#subset-generates-a-random-subset-of-elements-from-an-array): Generate a random subset of elements from an array.
+2. [powerSet](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#powerset-generates-the-power-set-of-the-given-set): Generate the Power Set of the given Set.
+3. [permute](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#permute-generates-all-possible-permutations-of-an-array): Generate all possible permutations of an array (computationally expensive for large arrays).
+4. [shuffle](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#shuffle-randomly-shuffles-an-array): Randomly shuffles an array.
+5. [choice](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#choice-picks-a-random-item-from-an-array): Picks a random item from an array.
+
+## Color Manipulation:
+
+1. [complimentaryColor](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#complimentarycolor--generate-a-random-color-complementary-to-a-given-color): Generate a random color complementary to a given color.
+2. [grayscale](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#grayscale-generate-random-grayscale-color): Generate random grayscale color.
+3. [randomShade](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#randomshade-generate-a-random-shade-darker-version-of-a-given-color): Generate a random shade (darker version) of a given color.
+4. [randomTint](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#randomtint-generate-a-random-tint-lighter-version-of-a-given-color): Generate a random tint (lighter version) of a given color.
+5. [hex](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#hex-generates-a-random-hex-color-code): Generates a random Hex color code.
+6. [rgb](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#rgb-generates-a-random-rgb-color): Generates a random RGB color.
+7. [hsl](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#hsl-generate-a-random-hsl-color): Generate a random HSL color.
+
+## Gaming Operations:
+
+1. [coinFlip](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#coinflip-randomly-return-heads-or-tails-with-custom-probabilities): Randomly return "heads" or "tails" with custom probabilities.
+2. [rollDice](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#rolldice-generates-a-random-simulated-result-of-rolling-a-die-with-a-specified-number-of-sides): Simulate rolling a die with a specified number of sides.
+3. [shuffleDeck](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#shuffledeck-randomly-shuffle-a-deck-of-cards-array-of-card-objects): Shuffle a deck of cards (array of card objects).
+4. [pickCard](https://github.com/AnshSinghSonkhia/random-math?tab=readme-ov-file#pickcard-returns-a-random-card-from-a-standard-deck-of-52-cards): Returns a random card from a standard deck of 52 cards.
+
 # Usage
 
 ### `uuid`: Generates a Random "Universally Unique Identifier" (UUIDv4).
