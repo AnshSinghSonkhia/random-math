@@ -11,8 +11,6 @@ NPM package for versatile randomization functions, Python-inspired, covering num
 npm i random-math
 ```
 
-# Usage
-
 > for modern JavaScript projects using ESM:
 
 ```js
@@ -24,6 +22,8 @@ import Random from 'random-math';
 ```js
 const Random = require('random-math');
 ```
+
+# Usage
 
 ### `uuid`: Generates a Random "Universally Unique Identifier" (UUIDv4).
 
