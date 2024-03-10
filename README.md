@@ -64,6 +64,17 @@ console.log(customToken);
 
 - Example Random Output:  ```12-92-28-9f-5c219e65```
 
+### `password`: Generate a random password with specified criteria (length, complexity).
+
+```js
+const lowPassword = Random.password(6, "low");
+console.log(lowPassword);     // example output:  f8iis2
+const mediumPassword = Random.password(10, "medium");
+console.log(mediumPassword);  // example output:  lwf5cn$ePw
+const highPassword = Random.password(16, "high");
+console.log(highPassword);    // example output:  "{)#lhI>N4"xiW*@
+```
+
 ### `stringFromChars`: Generates a random string of 12 characters
 
 ```js
@@ -83,17 +94,6 @@ console.log(randomString);
 ```
 
 - Example Random Output:  ```@^#&^&@*$%!*^$$```
-
-### `password`: Generate a random password with specified criteria (length, complexity).
-
-```js
-const lowPassword = Random.password(6, "low");
-console.log(lowPassword);     // example output:  f8iis2
-const mediumPassword = Random.password(10, "medium");
-console.log(mediumPassword);  // example output:  lwf5cn$ePw
-const highPassword = Random.password(16, "high");
-console.log(highPassword);    // example output:  "{)#lhI>N4"xiW*@
-```
 
 ### `multiFloat`: Generates an array of n random numbers between specific range.
 
