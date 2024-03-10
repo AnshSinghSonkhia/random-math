@@ -1,7 +1,7 @@
 {
   "name": "random-math",
   "version": "1.0.3",
-  "description": "Versatile randomization functions, Python-inspired, covering numbers, arrays, choices, characters, and colors.",
+  "description": "30+ versatile randomization functions, Python-inspired, UUID, Password generation, covering numbers, arrays, choices, characters, and colors.",
   "main": "index.js",
   "scripts": {
     "test": "npm run test"
@@ -16,7 +16,15 @@
     "random-math",
     "random-functions",
     "randomizer",
-    "random-numbers"
+    "random-numbers",
+    "random-colors",
+    "random-color",
+    "uuid",
+    "password",
+    "password-generator",
+    "customUUID",
+    "permutation",
+    "color"
   ],
   "author": "Ansh Singh Sonkhia",
   "license": "Apache-2.0",
