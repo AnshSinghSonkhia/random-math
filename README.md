@@ -251,6 +251,9 @@ console.log(Random.complimentaryColor("rgb(100,200,250)"));
 
 console.log(Random.complimentaryColor("hsl(120,50%,50%)"));
 // returns - hsl(300,50.00%,50.00%)
+
+console.log(Random.complimentaryColor("#ffffff"));
+// returns - #000000
 ```
 
 ### `randomShade`: Generate a random shade (darker version) of a given color.

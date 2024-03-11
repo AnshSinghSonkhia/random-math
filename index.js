@@ -354,20 +354,41 @@ const Random = {
 			return Math.min(Math.max(value, min), max);
 		};
 
+		const complimentaryHex = function(hex) {
+			if (!/^#[0-9A-F]{6}$/i.test(hex)) {
+				throw new Error("Unsupported color format. Only RGB, HSL and HEX formats are supported.");
+			}
+			hex = hex.substring(1);
+			let r = parseInt(hex.substring(0, 2), 16);
+			let g = parseInt(hex.substring(2, 4), 16);
+			let b = parseInt(hex.substring(4, 6), 16);
+	
+			r = (255 - r).toString(16).padStart(2, '0');
+			g = (255 - g).toString(16).padStart(2, '0');
+			b = (255 - b).toString(16).padStart(2, '0');
+	
+			return `#${r}${g}${b}`;
+		}
+
 		// Convert input color to HSL
 		let hslColor;
-		if (color.startsWith("rgb")) {
+
+		// conditions to return the same type of color format as in input
+		if (color.startsWith("#")) {
+			return complimentaryHex(color);
+		}
+		else if (color.startsWith("rgb")) {
 			const [r, g, b] = color.match(/\d+/g);
 			hslColor = rgbToHsl(parseInt(r), parseInt(g), parseInt(b));
 		} else if (color.startsWith("hsl")) {
 			hslColor = color.match(/\d+/g).map(Number);
 		} else {
 			throw new Error(
-				"Unsupported color format. Only RGB and HSL formats are supported."
+				"Unsupported color format. Only RGB, HSL and HEX formats are supported."
 			);
 		}
 
-		// Calculate complementary hue
+		// complementary hue calculation
 		let complementaryHue = (hslColor[0] + 180) % 360;
 
 		// Convert complementary hue back to original format
@@ -739,5 +760,6 @@ const Random = {
 		return true;
 	},
 };
+
 
 module.exports = Random;
