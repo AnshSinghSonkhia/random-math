@@ -372,6 +372,8 @@ const Random = {
 
 		// Convert input color to HSL
 		let hslColor;
+
+		// conditions to return the same type of color format as in input
 		if (color.startsWith("#")) {
 			return complimentaryHex(color);
 		}
@@ -386,7 +388,7 @@ const Random = {
 			);
 		}
 
-		// Calculate complementary hue
+		// complementary hue calculation
 		let complementaryHue = (hslColor[0] + 180) % 360;
 
 		// Convert complementary hue back to original format
