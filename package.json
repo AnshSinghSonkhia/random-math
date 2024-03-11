@@ -1,6 +1,6 @@
 {
   "name": "random-math",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "30+ versatile randomization functions, Python-inspired, UUID, Password generation, covering numbers, arrays, choices, characters, and colors.",
   "main": "index.js",
   "scripts": {
